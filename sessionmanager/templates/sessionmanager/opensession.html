@@ -1,0 +1,21 @@
+{% extends "sessionmanager/base.html" %}
+{% block content %}
+<div class="main">
+    <h1>EATSKO: KAHIT SAAN!</h1>
+    <div class="main-panel">
+        <h2>LOGIN</h2>
+
+        <div class="login-btn">
+            <a class="login-btn-text" href="{% url 'sessionmanager-loginuser' %}" >LOGIN AS USER</a>
+        </div>
+
+        <div class="login-btn">
+            <a class="login-btn-text" href="{% url 'sessionmanager-loginbusinessowner' %}" >LOGIN AS BUSINESS OWNER</a>
+        </div>
+
+        <div class="hint-container">
+            Need an account? <a class="" href="{% url 'sessionmanager-signup' %}">SIGN UP</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

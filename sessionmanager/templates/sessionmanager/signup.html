@@ -1,0 +1,43 @@
+{% extends "sessionmanager/base.html" %}
+{% block content %}
+<div class="main">
+    <h1>EATSKO: KAHIT SAAN!</h1>
+    <div class="main-panel">
+        <h2>SIGN UP</h2>
+
+        <div class="signup-input-container">
+            First Name
+            <input type="text" name="firstname">
+        </div>
+
+        <div class="signup-input-container">
+            Last Name
+            <input type="text" name="lastname">
+        </div>
+
+        <div class="signup-input-container">
+            Username
+            <input type="text" name="username">
+        </div>
+
+        <div class="signup-input-container">
+            Password
+            <input type="password" name="password">
+        </div>
+
+        <div class="signup-input-container">
+            Account Type
+            <div class="radio-container">
+                <input type="radio" name="accounttype">User
+                <br>
+                <input type="radio" name="accounttype">Business Owner
+            </div>
+        </div>
+
+        <div class="hint-container">
+            Already have an account? <a class="" href="{% url 'sessionmanager-opensession' %}">LOGIN</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
