@@ -1,3 +1,5 @@
 .vim
 .env
 venv
+__pycache__
+db.sqlite3
