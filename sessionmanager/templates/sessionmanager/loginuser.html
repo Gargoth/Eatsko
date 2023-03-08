@@ -1,4 +1,5 @@
 {% extends "sessionmanager/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="main">
     <h1>EATSKO: KAHIT SAAN!</h1>
@@ -8,22 +9,22 @@
         <h2>LOGIN</h2>
         <h3>as User</h3>
 
-        <div class="login-input-container">
-            Username
-            <input type="text" name="username">
-        </div>
-        <div class=login-input-container>
-            Password
-            <input type="password" name="password">
-        </div>
-
-        <div class="login-btn">
-            <!-- TODO: Change button for LOGIN -->
-            <a class="login-btn-text" href="{% url 'sessionmanager-loginuser' %}" >LOGIN</a>
-        </div>
-
-        <div class="hint-container">
-            Need an account? <a class="" href="{% url 'sessionmanager-signup' %}">SIGN UP</a>
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Log In</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Log In</button>
+                </div>
+            </form>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Don't Have An Account? <a class="ml-2" href="{% url 'sessionmanager-signup' %}">SIGN UP</a>
+                </small>
+            </div>
         </div>
     </div>
 </div>
