@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+        {% if title %}
+            <title>Eatsko - {{ title }}</title>
+        {% else %}
+            <title>Eatsko: Kahit Saan!</title>
+        {% endif %}
+    </head>
+    <body>
+        <div class="site-header">
+            <h1 class="header-txt">EATSKO: KAHIT SAAN!</h1>
+        </div>
+
+        <div class="site-sidebar">
+            <a class="sidebar-btn" href="{% url 'userdashboard-dashboard' %}">
+                <div class="sidebar-btn-container sidebar-active-container">
+                    <img class="sidebar-btn-icon" src="{% static 'media/home.svg' %}" alt="home-icon">
+                    <span class="sidebar-btn-text">DASHBOARD</span>
+                </div>
+            </a>
+            <a class="sidebar-btn" href="{% url 'userdashboard-profile' %}">
+                <div class="sidebar-btn-container">
+                    <img class="sidebar-btn-icon" src="{% static 'media/profile.svg' %}" alt="profile-icon">
+                    <span class="sidebar-btn-text">PROFILE</span>
+                </div>
+            </a>
+            <a class="sidebar-btn" href="{% url 'userdashboard-campusmap' %}">
+                <div class="sidebar-btn-container">
+                    <img class="sidebar-btn-icon" src="{% static 'media/campusmap.svg' %}" alt="campusmap-icon">
+                    <span class="sidebar-btn-text">CAMPUS MAP</span>
+                </div>
+            </a>
+            <a class="sidebar-btn" href="{% url 'userdashboard-findeatery' %}">
+                <div class="sidebar-btn-container">
+                    <img class="sidebar-btn-icon" src="{% static 'media/big-search.svg' %}" alt="findeatery-icon">
+                    <span class="sidebar-btn-text">FIND EATERY</span>
+                </div>
+            </a>
+        </div>
+
+        {% block content %}{% endblock content %}
+
+        <div class="site-end-container">
+            <div class="site-profile">
+                <img class="profile-img" src="{% static 'media/profile.svg' %}" alt="findeatery-icon">
+                <div class="profile-label">
+                    <span class="profile-label-txt">Name:</span>
+                    <div class="profile-content">
+                        <span class="profile-content-txt">{{ name }}</span>
+                    </div>
+                </div>
+                <div class="profile-label">
+                    <span class="profile-label-txt">Account Type:</span>
+                    <div class="profile-content">
+                        <span class="profile-content-txt">{{ type }}</span>
+                    </div>
+                </div>
+            </div>
+            <a class="signout-btn" href="{% url 'sessionmanager-opensession' %}">
+                <div class="signout-container">
+                    <span class="signout-txt">SIGN OUT</span>
+                </div>
+            </a>
+        </div>
+    </body>
+</html>
