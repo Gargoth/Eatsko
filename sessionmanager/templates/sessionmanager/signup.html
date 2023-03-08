@@ -1,41 +1,27 @@
 {% extends "sessionmanager/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="main">
     <h1>EATSKO: KAHIT SAAN!</h1>
     <div class="main-panel">
+        <a class="back-button" href="{% url 'sessionmanager-opensession' %}">←</a>
         <h2>SIGN UP</h2>
-
-        <div class="signup-input-container">
-            First Name
-            <input type="text" name="firstname">
-        </div>
-
-        <div class="signup-input-container">
-            Last Name
-            <input type="text" name="lastname">
-        </div>
-
-        <div class="signup-input-container">
-            Username
-            <input type="text" name="username">
-        </div>
-
-        <div class="signup-input-container">
-            Password
-            <input type="password" name="password">
-        </div>
-
-        <div class="signup-input-container">
-            Account Type
-            <div class="radio-container">
-                <input type="radio" name="accounttype">User
-                <br>
-                <input type="radio" name="accounttype">Business Owner
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Join Today</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                </div>
+            </form>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Already Have An Account? <a class="ml-2" href="{% url 'sessionmanager-opensession' %}">LOGIN</a>
+                </small>
             </div>
-        </div>
-
-        <div class="hint-container">
-            Already have an account? <a class="" href="{% url 'sessionmanager-opensession' %}">LOGIN</a>
         </div>
     </div>
 </div>

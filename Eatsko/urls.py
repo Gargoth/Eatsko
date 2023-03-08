@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from sessionmanager import views as sessionmanager_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('sessionmanager.urls'))
+    path('', include('sessionmanager.urls')),
+    
 ]

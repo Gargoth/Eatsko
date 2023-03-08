@@ -1,0 +1,16 @@
+{% extends "sessionmanager/base.html" %}
+{% block content %}
+<div class="main">
+    <h1>EATSKO: KAHIT SAAN!</h1>
+    <div class="main-panel">
+        <a class="back-button" href="{% url 'sessionmanager-opensession' %}">←</a>
+        <h2>You have been logged out.</h2>
+        
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                <a href="{% url 'sessionmanager-opensession' %}">Log In Again</a>
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock content %}
