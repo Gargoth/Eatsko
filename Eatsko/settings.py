@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 from decouple import config
 
@@ -35,6 +36,7 @@ INSTALLED_APPS = [
     'sessionmanager.apps.SessionmanagerConfig',
     'crispy_bootstrap4',
     'crispy_forms',
+    'userdashboard.apps.UserdashboardConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -58,7 +60,7 @@ ROOT_URLCONF = 'Eatsko.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'userdashboard', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

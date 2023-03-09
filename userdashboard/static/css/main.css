@@ -1,0 +1,10 @@
+:root {
+    --primary-color: #982f28;
+    --secondary-color: #fde4ac;
+    --tertiary-color: #f2dcca;
+    --icon-color: #d58b4f;
+}
+
+.sidebar-btn-icon {
+    color: var(--icon-color);
+}

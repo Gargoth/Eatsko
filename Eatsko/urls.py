@@ -20,5 +20,5 @@ from sessionmanager import views as sessionmanager_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('sessionmanager.urls')),
-    
+    path('user', include('userdashboard.urls')),
 ]
