@@ -1,4 +1,25 @@
 {% extends "userdashboard/base.html" %}
 {% block content %}
-findeatery
+
+<form class="d-flex" method=POST action="{% url 'userdashboard-findeatery' %}">
+    {% csrf_token %}
+
+    <input class="form-control me-2" type="search" placeholder="Search Eateries" aria-label="Search" name="searched">
+    <button class="btn btn-outline-secondary" type="submit">Search</button>
+</form>
+
+{% for eatery in eateries %}
+
+<article class="media content-section">
+    <img class="rounded-circle"  style="width: 65px; height: 65px;" src="{{ eatery.logo.url }}">
+    <div class="media-body">
+      <div class="article-metadata">
+    
+      </div>
+      <h2><a class="article-title" href="#">{{  eatery.eatery_name }}</a></h2>
+     
+      <p class="article-content"> {{  eatery.location }}</p>
+    </div>
+  </article>
+  {% endfor %}
 {% endblock content %}

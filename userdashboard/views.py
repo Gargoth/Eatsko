@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from . models import Eatery
+from django.views.generic import ListView
+
 
 context = {}
 context['name'] = 'Juan dela Cruz'
@@ -8,17 +11,6 @@ context['type'] = 'User'
 
 @login_required
 def dashboard(request):
-    # Generate list of Eateries to be displayed in the main panel of the User Dashboard
-    # Eateries should be retrieved from the database in the future
-    # for i in range(5):
-    #     context['eateries'].append(
-    #         {
-    #             'name': f'Eatery Name {i}',
-    #             'genre': 'Filipino',
-    #             'location': 'Area 2',
-    #             'rating': 5,
-    #         },
-    #     )
     context['page'] = 'dashboard'
     return render(request, 'userdashboard/dashboard.html', context)
 
@@ -34,5 +26,23 @@ def campusmap(request):
 
 @login_required
 def findeatery(request):
-    context['page'] = 'findeatery'
-    return render(request, 'userdashboard/findeatery.html', context)
+    if request.method == "POST":
+        searched = request.POST['searched']
+        eatery_search = Eatery.objects.filter(eatery_name__icontains=searched)
+	
+        return render(request, 'userdashboard/findeatery.html', {'searched':searched, 'eateries':eatery_search})
+    
+    else:
+         return render(request, 'userdashboard/findeatery.html', {'eateries':Eatery.objects.all()})
+    
+
+class EateryListView(ListView):
+        
+	model = Eatery
+	paginate_by = 10
+	template_name = 'userdashboard/findeatery.html'
+	
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['eatery'] = Eatery.objects.all()
+		return context
