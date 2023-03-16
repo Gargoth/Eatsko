@@ -1,88 +1,22 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-context = {
-    'name': 'Juan dela Cruz',
-    'type': 'User',
-    'eateries': [
-            {
-                'name': 'Eatery Name',
-                'genre': 'Filipino',
-                'location': 'Area 2',
-                'rating': 5,
-            },
-            {
-                'name': 'Eatery Name',
-                'genre': 'Filipino',
-                'location': 'Area 2',
-                'rating': 5,
-            },
-            {
-                'name': 'Eatery Name',
-                'genre': 'Filipino',
-                'location': 'Area 2',
-                'rating': 5,
-            },
-            {
-                'name': 'Eatery Name',
-                'genre': 'Filipino',
-                'location': 'Area 2',
-                'rating': 5,
-            },
-            {
-                'name': 'Eatery Name',
-                'genre': 'Filipino',
-                'location': 'Area 2',
-                'rating': 5,
-            },
-            {
-                'name': 'Eatery Name',
-                'genre': 'Filipino',
-                'location': 'Area 2',
-                'rating': 5,
-            },
-        ],
-}
+context = {}
+context['name'] = 'Juan dela Cruz'
+context['type'] = 'User'
 
 def dashboard(request):
-    context['eateries'] = [
+    # Generate list of Eateries to be displayed in the main panel of the User Dashboard
+    # Eateries should be retrieved from the database in the future
+    for i in range(5):
+        context['eateries'].append(
             {
-                'name': 'Eatery Name',
+                'name': f'Eatery Name {i}',
                 'genre': 'Filipino',
                 'location': 'Area 2',
                 'rating': 5,
             },
-            {
-                'name': 'Eatery Name',
-                'genre': 'Filipino',
-                'location': 'Area 2',
-                'rating': 5,
-            },
-            {
-                'name': 'Eatery Name',
-                'genre': 'Filipino',
-                'location': 'Area 2',
-                'rating': 5,
-            },
-            {
-                'name': 'Eatery Name',
-                'genre': 'Filipino',
-                'location': 'Area 2',
-                'rating': 5,
-            },
-            {
-                'name': 'Eatery Name',
-                'genre': 'Filipino',
-                'location': 'Area 2',
-                'rating': 5,
-            },
-            {
-                'name': 'Eatery Name',
-                'genre': 'Filipino',
-                'location': 'Area 2',
-                'rating': 5,
-            },
-    ]
+        )
     context['page'] = 'dashboard'
     return render(request, 'userdashboard/dashboard.html', context)
 

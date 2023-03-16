@@ -22,6 +22,7 @@
         </header>
 
         <div class="row px-5">
+            <!-- Sidebar Buttons -->
             <nav class="nav flex-column col-3 site-panel site-sidebar">
                 <a class="sidebar-btn" href="{% url 'userdashboard-dashboard' %}">
                     <div class="sidebar-btn-container {% if page == 'dashboard' %} sidebar-active-container {% endif %}">
@@ -49,10 +50,12 @@
                 </a>
             </nav>
 
+            <!-- Center panel for main page content -->
             <div class="col-5 site-panel main">
-            {% block content %}{% endblock content %}
+                {% block content %}{% endblock content %}
             </div>
 
+            <!-- Panel for Profile Information -->
             <div class="col-3 site-panel site-end-container">
                 <div class="site-profile">
                     <img class="mx-auto d-block rounded-circle profile-img" src="{% static 'media/profile.svg' %}" alt="findeatery-icon">
