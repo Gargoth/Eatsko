@@ -6,6 +6,10 @@
     --bg-color: #F3F3F3;
 }
 
+* {
+    font-family: Montserrat;
+}
+
 body {
     background: var(--bg-color);
 }
@@ -97,3 +101,136 @@ body {
     color: white;
     font-size: 0.8em;
 }
+
+hr {
+    border-top: 0.5px solid
+}
+
+hr.find-eatery-hr {
+    margin: 0;
+}
+
+.form-rounded {
+    border-radius: 5em;
+}
+
+.search-bar {
+    margin: 0.35em;
+}
+
+.search-bar-input {
+    background-color: #F3F3F3;
+}
+
+.search-button {
+    height: 2em;
+    width: 2em;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    background-color: #D9D9D9;
+}
+
+.form-control {
+    height: 2em;
+}
+
+.page-icon {
+    width: 2.5em;
+    height: 2.5em;
+    margin: 0.35em 0 0.35em 0.35em;
+}
+
+.page-title {
+    color: black;
+    font-size: 1.25em;
+    font-weight: bold;
+    margin: 0.35em;
+    text-align: center;
+}
+
+.food-pref-container {
+    display: flex;
+    margin: 0.35em;
+    padding: 0.1em 0.35em;
+    background: var(--icon-color);
+    border-radius: 1em;
+    justify-content: center;
+    align-items: center;
+}
+
+.food-pref-txt {
+    color: white;
+    font-size: 0.5em;
+}
+
+.food-filter-txt {
+    font-size: 0.7em;
+}
+
+select.food-genres {
+    background-color: #F3F3F3;
+    height: 1.4em;
+    width: 10em;
+    margin-right: 0.2em;
+    border: 1px solid lightgray;
+}
+
+.price-range-input {
+    height: 1.2em;
+    width: 2.45em;
+    background-color: #F3F3F3;
+    border: 1px solid lightgray;
+}
+
+.location-input {
+    background-color: #F3F3F3;
+    height: 1.4em;
+    width: 12em;
+    border: 1px solid lightgray;
+    margin-right: 0.25em;
+}
+
+.apply-filter {
+    color: black;
+    font-size: 0.65em;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.eatery-result-container {
+    border-radius: 0.5em;
+    box-shadow: 0 4px 4px lightgray;
+    height: 8.5em;
+    width: 14em;
+    padding: 0.5em;
+    margin: 0 0 0.5em 0;
+}
+
+.article-title {
+    color: black;
+    margin: 0.2em;
+}
+
+.eatery-logo {
+    width: 67px; 
+    height: 67px;
+    margin-right: 1em;
+    margin-left: 0.5em;
+}
+
+.eatery-name {
+    font-size: 0.85em;
+    font-weight: 450;
+    text-decoration: underline;
+}
+
+.eatery-description {
+    font-size: 0.65em;
+}
+
+.content-section {
+    margin: 0.5em 0.5em 0.5em 0;
+    padding: 0.5em 0.5em 0.5em 0;
+}
+
