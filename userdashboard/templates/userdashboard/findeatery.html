@@ -1,25 +1,83 @@
 {% extends "userdashboard/base.html" %}
 {% block content %}
+{% load static %}
 
-<form class="d-flex" method=POST action="{% url 'userdashboard-findeatery' %}">
-    {% csrf_token %}
 
-    <input class="form-control me-2" type="search" placeholder="Search Eateries" aria-label="Search" name="searched">
-    <button class="btn btn-outline-secondary" type="submit">Search</button>
-</form>
+<!-- Header and Search Bar -->
+<div class="d-flex">
+  <div class="mr-auto">
+    <img class="page-icon" src="{% static 'media/big-search.svg' %}" alt="findeatery-icon">
+    <span class="page-title"> FIND EATERY </span>
+  </div>
+  <div class="ml-auto search-bar">
+    <form class="d-flex" method=POST action="{% url 'userdashboard-findeatery' %}">
+      {% csrf_token %}
+      <input class="form-control form-rounded me-2 search-bar-input" type="search" placeholder="Search Eateries" aria-label="Search" name="searched">
+      <button class="search-button btn btn-outline-secondary form-rounded" type="submit">
+        <img class="search-bar-icon" src="{% static 'media/search.svg' %}" alt="search-icon">
+      </button>
+    </form>
+  </div>
+</div>
 
-{% for eatery in eateries %}
-
-<article class="media content-section">
-    <img class="rounded-circle"  style="width: 65px; height: 65px;" src="{{ eatery.logo.url }}">
-    <div class="media-body">
-      <div class="article-metadata">
-    
-      </div>
-      <h2><a class="article-title" href="#">{{  eatery.eatery_name }}</a></h2>
-     
-      <p class="article-content"> {{  eatery.location }}</p>
+<!-- Food Preferences -->
+<div class="d-flex">
+  <div class="food-pref">
+    <div class="food-pref-container">
+      <span class="food-pref-txt"> FOOD PREFERENCES </span>
     </div>
-  </article>
-  {% endfor %}
+  </div>
+  <div class="food-filters d-flex flex-column">
+    <div class="top-filters d-flex flex-row">
+      <div class="food-genres">
+        <p class="food-filter-txt"> Food Genres:
+          <select class="food-genres form-rounded">
+            <option selected>  </option>
+            <option value="1"> Siomai </option>
+            <option value="1"> Shawarma </option>
+          </select>
+        </p>
+      </div>
+      <div class="price-range">
+        <p class="food-filter-txt"> Price Range: ₱
+        <input type="text" class="price-range-input" placeholder="999">
+        - ₱
+        <input type="text" class="price-range-input" placeholder="999">
+        </p>
+      </div>
+    </div>
+    <div class="bottom-filters d-flex flex-row">
+      <p class="food-filter-txt"> Location: 
+        <input type="text" class="location-input form-rounded">
+      </p>
+      <a class="apply-filter" href="#">
+        Apply Filter
+      </a>
+    </div>
+  </div>
+</div>
+
+<hr class="find-eatery-hr">
+
+<!-- Search Results -->
+<div class="search-results-container d-flex flex-wrap justify-content-around">
+  {% for eatery in eateries %}
+
+  <a class="article-title d-flex" href="#">
+    <div class="eatery-result-container">
+        <article class="media content-section">
+          <img class="rounded-circle eatery-logo" src="{{ eatery.logo.url }}">
+          <div class="media-body d-flex flex-column">
+            <span class="eatery-name">{{  eatery.eatery_name }}</span>
+            <p class="eatery-description"> {{  eatery.food_genre }}
+              <br> {{  eatery.location }}
+              <br> <span> Rating: </span>
+            </p>
+          </div>
+        </article>
+    </div>
+  </a>
+    {% endfor %}
+</div>
+
 {% endblock content %}
