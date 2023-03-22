@@ -106,10 +106,6 @@ hr {
     border-top: 0.5px solid
 }
 
-hr.find-eatery-hr {
-    margin: 0;
-}
-
 .form-rounded {
     border-radius: 5em;
 }
@@ -233,4 +229,3 @@ select.food-genres {
     margin: 0.5em 0.5em 0.5em 0;
     padding: 0.5em 0.5em 0.5em 0;
 }
-
