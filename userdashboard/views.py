@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from . models import Eatery
 from django.views.generic import ListView
+from . models import Eatery
 
 
 context = {}
@@ -29,11 +29,8 @@ def findeatery(request):
     if request.method == "POST":
         searched = request.POST['searched']
         eatery_search = Eatery.objects.filter(eatery_name__icontains=searched)
-	
         return render(request, 'userdashboard/findeatery.html', {'searched':searched, 'eateries':eatery_search})
-    
-    else:
-         return render(request, 'userdashboard/findeatery.html', {'eateries':Eatery.objects.all()})
+    return render(request, 'userdashboard/findeatery.html', {'eateries':Eatery.objects.all()})
     
 
 class EateryListView(ListView):
