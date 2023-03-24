@@ -26,11 +26,15 @@ def campusmap(request):
 
 @login_required
 def findeatery(request):
+    context['page'] = 'findeatery'
     if request.method == "POST":
         searched = request.POST['searched']
         eatery_search = Eatery.objects.filter(eatery_name__icontains=searched)
-        return render(request, 'userdashboard/findeatery.html', {'searched':searched, 'eateries':eatery_search})
-    return render(request, 'userdashboard/findeatery.html', {'eateries':Eatery.objects.all()})
+        context['searched'] = searched
+        context['eateries'] = eatery_search
+        return render(request, 'userdashboard/findeatery.html', context)
+    context['eateries'] = Eatery.objects.all()
+    return render(request, 'userdashboard/findeatery.html', context)
     
 
 class EateryListView(ListView):
