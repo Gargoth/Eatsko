@@ -22,33 +22,35 @@
         </header>
 
         <div class="row px-5">
-            <!-- Sidebar Buttons -->
-            <nav class="nav flex-column col-3 site-panel site-sidebar">
-                <a class="sidebar-btn" href="{% url 'userdashboard-dashboard' %}">
-                    <div class="sidebar-btn-container {% if page == 'dashboard' %} sidebar-active-container {% endif %}">
-                        <img class="sidebar-btn-icon" src="{% static 'media/home.svg' %}" alt="home-icon">
-                        <span class="sidebar-btn-text">DASHBOARD</span>
-                    </div>
-                </a>
-                <a class="sidebar-btn" href="{% url 'userdashboard-profile' %}">
-                    <div class="sidebar-btn-container {% if page == 'profile' %} sidebar-active-container {% endif %}">
-                        <img class="sidebar-btn-icon" src="{% static 'media/profile.svg' %}" alt="profile-icon">
-                        <span class="sidebar-btn-text">PROFILE</span>
-                    </div>
-                </a>
-                <a class="sidebar-btn" href="{% url 'userdashboard-campusmap' %}">
-                    <div class="sidebar-btn-container {% if page == 'campusmap' %} sidebar-active-container {% endif %}">
-                        <img class="sidebar-btn-icon" src="{% static 'media/campusmap.svg' %}" alt="campusmap-icon">
-                        <span class="sidebar-btn-text">CAMPUS MAP</span>
-                    </div>
-                </a>
-                <a class="sidebar-btn" href="{% url 'userdashboard-findeatery' %}">
-                    <div class="sidebar-btn-container {% if page == 'findeatery' %} sidebar-active-container {% endif %}">
-                        <img class="sidebar-btn-icon" src="{% static 'media/big-search.svg' %}" alt="findeatery-icon">
-                        <span class="sidebar-btn-text">FIND EATERY</span>
-                    </div>
-                </a>
-            </nav>
+            <div class="col-3 m-0 p-0">
+                <!-- Sidebar Buttons -->
+                <nav class="nav flex-column site-panel site-sidebar">
+                    <a class="sidebar-btn" href="{% url 'userdashboard-dashboard' %}">
+                        <div class="sidebar-btn-container {% if page == 'dashboard' %} sidebar-active-container {% endif %}">
+                            <img class="sidebar-btn-icon" src="{% static 'media/home.svg' %}" alt="home-icon">
+                            <span class="sidebar-btn-text">DASHBOARD</span>
+                        </div>
+                    </a>
+                    <a class="sidebar-btn" href="{% url 'userdashboard-profile' %}">
+                        <div class="sidebar-btn-container {% if page == 'profile' %} sidebar-active-container {% endif %}">
+                            <img class="sidebar-btn-icon" src="{% static 'media/profile.svg' %}" alt="profile-icon">
+                            <span class="sidebar-btn-text">PROFILE</span>
+                        </div>
+                    </a>
+                    <a class="sidebar-btn" href="{% url 'userdashboard-campusmap' %}">
+                        <div class="sidebar-btn-container {% if page == 'campusmap' %} sidebar-active-container {% endif %}">
+                            <img class="sidebar-btn-icon" src="{% static 'media/campusmap.svg' %}" alt="campusmap-icon">
+                            <span class="sidebar-btn-text">CAMPUS MAP</span>
+                        </div>
+                    </a>
+                    <a class="sidebar-btn" href="{% url 'userdashboard-findeatery' %}">
+                        <div class="sidebar-btn-container {% if page == 'findeatery' %} sidebar-active-container {% endif %}">
+                            <img class="sidebar-btn-icon" src="{% static 'media/big-search.svg' %}" alt="findeatery-icon">
+                            <span class="sidebar-btn-text">FIND EATERY</span>
+                        </div>
+                    </a>
+                </nav>
+            </div>
 
             <!-- Center panel for main page content -->
             <div class="col-5 site-panel main">
