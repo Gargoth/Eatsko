@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from . models import Eatery
+from django.core.paginator import Paginator
 
 
 context = {}
@@ -29,11 +30,15 @@ def findeatery(request):
     context['page'] = 'findeatery'
     if request.method == "POST":
         searched = request.POST['searched']
-        eatery_search = Eatery.objects.filter(eatery_name__icontains=searched)
+        eateries_list = Eatery.objects.filter(eatery_name__icontains=searched)
         context['searched'] = searched
-        context['eateries'] = eatery_search
-        return render(request, 'userdashboard/findeatery.html', context)
-    context['eateries'] = Eatery.objects.all()
+    else:
+        eateries_list = Eatery.objects.all()
+
+    paginator = Paginator(eateries_list, 6) # 6 eateries per page
+    page = request.GET.get('page') # Get current page number
+    eateries = paginator.get_page(page) # Get eateries for current page
+    context['eateries'] = eateries
     return render(request, 'userdashboard/findeatery.html', context)
     
 

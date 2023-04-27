@@ -10,8 +10,8 @@ class Eatery(models.Model):
     food_genre = models.CharField(max_length=200, default='', blank=True)
     details = models.TextField(blank=True)
     location = models.CharField(max_length=200, default='')
-    logo = models.ImageField(default='default.png', upload_to='eatery_logos')
-    banner = models.ImageField(default='banner.jpg', upload_to='eatery_banners')
+    logo = models.ImageField(default='eatery_logos/default.png', upload_to='eatery_logos')
+    banner = models.ImageField(default='eatery_banners/banner.jpg', upload_to='eatery_banners')
     date_created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
