@@ -25,25 +25,29 @@
             <div class="col-3 m-0 p-0">
                 <!-- Sidebar Buttons -->
                 <nav class="nav flex-column site-panel site-sidebar">
-                    <a class="sidebar-btn" href="{% url 'userdashboard-dashboard' %}">
+                    <a class="sidebar-btn" href="{% url 'userdashboard-dashboard' %}" 
+                                           {% if page == 'profile' %} onclick="return confirm('Exit without saving?');" {% endif %}>
                         <div class="sidebar-btn-container {% if page == 'dashboard' %} sidebar-active-container {% endif %}">
                             <img class="sidebar-btn-icon" src="{% static 'media/home.svg' %}" alt="home-icon">
                             <span class="sidebar-btn-text">DASHBOARD</span>
                         </div>
                     </a>
-                    <a class="sidebar-btn" href="{% url 'userdashboard-profile' %}">
+                    <a class="sidebar-btn" href="{% url 'userdashboard-profile' %}"
+                                           {% if page == 'profile' %} onclick="return confirm('Exit without saving?');" {% endif %}>
                         <div class="sidebar-btn-container {% if page == 'profile' %} sidebar-active-container {% endif %}">
                             <img class="sidebar-btn-icon" src="{% static 'media/profile.svg' %}" alt="profile-icon">
                             <span class="sidebar-btn-text">PROFILE</span>
                         </div>
                     </a>
-                    <a class="sidebar-btn" href="{% url 'userdashboard-campusmap' %}">
+                    <a class="sidebar-btn" href="{% url 'userdashboard-campusmap' %}"
+                                           {% if page == 'profile' %} onclick="return confirm('Exit without saving?');" {% endif %}>
                         <div class="sidebar-btn-container {% if page == 'campusmap' %} sidebar-active-container {% endif %}">
                             <img class="sidebar-btn-icon" src="{% static 'media/campusmap.svg' %}" alt="campusmap-icon">
                             <span class="sidebar-btn-text">CAMPUS MAP</span>
                         </div>
                     </a>
-                    <a class="sidebar-btn" href="{% url 'userdashboard-findeatery' %}">
+                    <a class="sidebar-btn" href="{% url 'userdashboard-findeatery' %}"
+                                           {% if page == 'profile' %} onclick="return confirm('Exit without saving?');" {% endif %}>
                         <div class="sidebar-btn-container {% if page == 'findeatery' %} sidebar-active-container {% endif %}">
                             <img class="sidebar-btn-icon" src="{% static 'media/big-search.svg' %}" alt="findeatery-icon">
                             <span class="sidebar-btn-text">FIND EATERY</span>
@@ -61,7 +65,7 @@
             <div class="col-3 m-0 p-0">
                 <div class="site-panel site-end-container">
                     <div class="site-profile">
-                        <img class="mx-auto d-block rounded-circle profile-img" src="{% static 'media/profile.svg' %}" alt="findeatery-icon">
+                        <img class="mx-auto d-block rounded-circle profile-img" src="{{ user.user_profile.profile_picture.url }}" alt="user profile picture">
                         <div class="profile-label">
                             <span class="profile-label-txt profile-txt">Name:</span>
                             <div class="profile-content">
@@ -71,7 +75,7 @@
                         <div class="profile-label">
                             <span class="profile-label-txt profile-txt">Account Type:</span>
                             <div class="profile-content">
-                                <span class="profile-content-txt profile-txt">{{ type }}</span>
+                                <span class="profile-content-txt profile-txt">{{ user.user_profile.account_type }}</span>
                             </div>
                         </div>
                     </div>

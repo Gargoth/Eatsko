@@ -14,6 +14,10 @@ body {
     background: var(--bg-color);
 }
 
+#id_preffered_genres {
+    height: 5em;
+}
+
 .site-header {
     padding: 2em 3em;
     margin-bottom: -1em;
