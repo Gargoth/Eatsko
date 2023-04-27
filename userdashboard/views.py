@@ -1,14 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
-from . models import Eatery
+from .models import Eatery
+from userdashboard.forms import UserUpdateForm, ProfileUpdateForm
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 
 context = {}
-context['name'] = 'Juan dela Cruz'
-context['type'] = 'User'
 
 @login_required
 def dashboard(request):
@@ -17,7 +17,24 @@ def dashboard(request):
 
 @login_required
 def profile(request):
+
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.user_profile)
+
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('userdashboard-profile')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.user_profile)
+
     context['page'] = 'profile'
+    context['u_form'] = u_form
+    context['p_form'] = p_form
+
     return render(request, 'userdashboard/profile.html', context)
 
 @login_required
