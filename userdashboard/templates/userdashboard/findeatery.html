@@ -1,123 +1,103 @@
-{% extends "userdashboard/base.html" %}
-{% block content %}
+{% extends "userdashboard/base.html" %} 
+{% block content %} 
 {% load static %}
-
 
 <!-- Header and Search Bar -->
 <div class="d-flex">
-  <div class="mr-auto">
-    <img class="page-icon" src="{% static 'media/big-search.svg' %}" alt="findeatery-icon">
-    <span class="page-title"> FIND EATERY </span>
-  </div>
-  <div class="ml-auto search-bar">
-    <form class="d-flex" method=POST action="{% url 'userdashboard-findeatery' %}">
-      {% csrf_token %}
-      <input class="form-control form-rounded me-2 search-bar-input" type="search" placeholder="Search Eateries" aria-label="Search" name="searched">
-      <button class="search-button btn btn-outline-secondary form-rounded" type="submit">
-        <img class="search-bar-icon" src="{% static 'media/search.svg' %}" alt="search-icon">
-      </button>
-    </form>
-  </div>
+
+   <div class="mr-auto"> 
+      <img class="page-icon" src="{% static 'media/big-search.svg' %}" alt="findeatery-icon"> 
+      <span class="page-title"> FIND EATERY </span> 
+   </div>
+
+   <div class="ml-auto search-bar">
+      <form method="get" class="d-flex"action="{% url 'userdashboard-findeatery' %}">
+      <div class="form-group ml-auto search-bar" > 
+         <input class="form-control form-rounded me-2 search-bar-input" type="search" placeholder="Search Eateries" 
+         aria-label="Search" name="q" value="{{ search_term|default:"" }}" id="search"> 
+      </div>
+      <button class="search-button btn btn-outline-secondary form-rounded " type="submit"> 
+        <img class="search-bar-icon" src="{% static 'media/search.svg' %}" alt="search-icon"> 
+      </button> 
+   </div>
+
 </div>
 
 <!-- Food Preferences -->
 <div class="d-flex">
-  <div class="food-pref">
-    <div class="food-pref-container">
-      <span class="food-pref-txt"> FOOD PREFERENCES </span>
-    </div>
-  </div>
-  <div class="food-filters d-flex flex-column">
-    <div class="top-filters d-flex flex-row">
-      <div class="food-genres">
-        <p class="food-filter-txt"> Food Genres:
-          <select class="food-genres form-rounded">
-            <option selected>  </option>
-            <option value="1"> Siomai </option>
-            <option value="1"> Shawarma </option>
-          </select>
-        </p>
+   <div class="food-pref">
+      <div class="food-pref-container"> <span class="food-pref-txt"> FOOD PREFERENCES </span> </div>
+   </div>
+   <div class="food-filters d-flex flex-column">
+      <div class="top-filters d-flex flex-row">
+         <div class="food-genres flex-grow-1">
+            <div class="form-group">
+               <p class="food-filter-txt">
+                  <label for="food_genre">Food Genre:</label>
+                  <select name="food_genre" class="form-control-xs food-genres form-rounded" id="food_genre">
+                     <option value="">Select a food genre</option>
+                     <option value="Filipino" {% if food_genre == "Filipino" %}selected{% endif %}>Filipino</option>
+                     <option value="Grilled" {% if food_genre == "Grilled"%}selected{% endif %}>Grilled</option>
+                     <option value="Japanese" {% if food_genre == "Japanese" %}selected{% endif %}>Japanese</option>
+                     <option value="Lutong Bahay" {% if food_genre == "Lutong Bahay" %}selected{% endif %}>Lutong Bahay</option>
+                     <option value="Snack" {% if food_genre == "Snack" %}selected{% endif %}>Snack</option>
+                  </select>
+               </p>
+            </div>
+         </div>
+         <div class="price-range flex-grow-1">
+            <p class="food-filter-txt">
+               Price Range: ₱ <input type="text" class="price-range-input" placeholder="999"> - ₱ <input type="text" class="price-range-input" placeholder="999">
+            </p>
+         </div>
       </div>
-      <div class="price-range">
-        <p class="food-filter-txt"> 
-        Price Range: ₱
-        <input type="text" class="price-range-input" placeholder="999">
-        - ₱
-        <input type="text" class="price-range-input" placeholder="999">
-        </p>
+      <div class="bottom-filters d-flex flex-row">
+         <div class="form-group">
+            <p class="food-filter-txt">
+               <label for="location">Location:</label>
+               <input type="text" name="location" value="{{ location|default:"" }}" class="form-control-xs form-rounded" id="location">
+            </p>
+         </div>
+         <div>
+            <button type="submit" class="btn btn-sm btn-secondary">Apply Filter</button>
+         </div>
       </div>
-    </div>
-    <div class="bottom-filters d-flex flex-row">
-      <p class="food-filter-txt"> Location: 
-        <input type="text" class="location-input form-rounded">
-      </p>
-      <a class="apply-filter" href="#">
-        Apply Filter
-      </a>
-    </div>
-  </div>
+   </div>
 </div>
-
 <hr style="margin: 0">
-
 <!-- Search Results -->
 <div class="search-results-container d-flex flex-wrap justify-content-around">
-  {% for eatery in eateries %}
-
-  <a class="article-title d-flex" href="#">
-    <div class="eatery-result-container">
-        <article class="media content-section">
-          <img class="rounded-circle eatery-logo" src="{{ eatery.logo.url }}">
-          <div class="media-body d-flex flex-column">
-            <span class="eatery-name">{{  eatery.eatery_name }}</span>
-            <p class="eatery-description"> 
-              {{  eatery.food_genre }}
-              <br> {{  eatery.location }}
-              <br> Rating:
-            </p>
-          </div>
-        </article>
-    </div>
-  </a>
-
-  {% empty %}
-    <p> No eateries found </p>
-
-  {% endfor %}
-
-  
+   {% for eatery in eateries %} 
+   <a class="article-title d-flex" href="#">
+      <div class="eatery-result-container">
+         <article class="media content-section">
+            <img class="rounded-circle eatery-logo" src="{{ eatery.logo.url }}">
+            <div class="media-body d-flex flex-column">
+               <span class="eatery-name">{{ eatery.eatery_name }}</span>
+               <p class="eatery-description"> {{ eatery.food_genre }} <br> {{ eatery.location }} <br> Rating: </p>
+            </div>
+         </article>
+      </div>
+   </a>
+   {% empty %} 
+   <p> No eateries found </p>
+   {% endfor %} 
 </div>
-
 <div class="pagination d-flex justify-content-center ">
-  <nav aria-label="...">
-    {% if eateries.has_other_pages %}
+   <nav aria-label="...">
+      {% if is_paginated %} 
       <ul class="pagination justify-content-center">
-        {% if eateries.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ eateries.previous_page_number }}" tabindex="-1">Previous</a>
-          </li>
-        {% endif %}
-        {% for i in eateries.paginator.page_range %}
-          {% if eateries.number == i %}
-            <li class="page-item active">
-              <a class="page-link" href="#">{{ i }} <span class="sr-only">(current)</span></a>
-            </li>
-          {% else %}
-            <li class="page-item">
-              <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-            </li>
-          {% endif %}
-        {% endfor %}
-        {% if eateries.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ eateries.next_page_number }}">Next</a>
-          </li>
-        {% endif %}
+         {% if page_obj.has_previous %} 
+         <li class="page-item"> <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a> </li>
+         {% endif %} {% for i in page_obj.paginator.page_range %} {% if page_obj.number == i %} 
+         <li class="page-item active"> <a class="page-link" href="#">{{ i }} <span class="sr-only">(current)</span></a> </li>
+         {% else %} 
+         <li class="page-item"> <a class="page-link" href="?page={{ i }}">{{ i }}</a> </li>
+         {% endif %} {% endfor %} {% if page_obj.has_next %} 
+         <li class="page-item"> <a class="page-link" href="?page={{ eateries.next_page_number }}">Next</a> </li>
+         {% endif %} 
       </ul>
-    {% endif %}
-  </nav>
-  
+      {% endif %} 
+   </nav>
 </div>
-
-
 {% endblock content %}

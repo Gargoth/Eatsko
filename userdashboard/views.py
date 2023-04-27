@@ -28,27 +28,35 @@ def campusmap(request):
 @login_required
 def findeatery(request):
     context['page'] = 'findeatery'
-    if request.method == "POST":
-        searched = request.POST['searched']
-        eateries_list = Eatery.objects.filter(eatery_name__icontains=searched)
-        context['searched'] = searched
-    else:
-        eateries_list = Eatery.objects.all()
-
-    paginator = Paginator(eateries_list, 6) # 6 eateries per page
-    page = request.GET.get('page') # Get current page number
-    eateries = paginator.get_page(page) # Get eateries for current page
-    context['eateries'] = eateries
     return render(request, 'userdashboard/findeatery.html', context)
     
-
 class EateryListView(ListView):
+    model = Eatery
+    template_name = 'userdashboard/findeatery.html'
+    context_object_name = 'eateries'
+    paginate_by = 6
+    ordering = ['eatery_name']
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('q')
+        location = self.request.GET.get('location')
+        food_genre = self.request.GET.get('food_genre')
+
         
-	model = Eatery
-	paginate_by = 10
-	template_name = 'userdashboard/findeatery.html'
-	
-	def get_context_data(self, **kwargs):
-		context = super().get_context_data(**kwargs)
-		context['eatery'] = Eatery.objects.all()
-		return context
+        if query:
+            queryset = queryset.filter(eatery_name__icontains=query)
+        if location:
+            queryset = queryset.filter(location__icontains=location)
+        if food_genre:
+            queryset = queryset.filter(food_genre__icontains=food_genre)
+        
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_term'] = self.request.GET.get('q')
+        context['location'] = self.request.GET.get('location')
+        context['food_genre'] = self.request.GET.get('food_genre')
+        return context
+
