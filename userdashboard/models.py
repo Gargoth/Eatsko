@@ -34,6 +34,7 @@ class Profile(models.Model):
 
 class Eatery(models.Model):
     eatery_name = models.CharField(max_length=100)
+    food_genre = models.CharField(null=True, max_length=100) # Temporary Fix
     food_genres = models.ManyToManyField(FoodGenre)
     details = models.TextField(blank=True)
     location = models.CharField(max_length=200, default='')
