@@ -3,9 +3,21 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from PIL import Image
 
+class FoodGenre(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.name}'
+
+class Profile(User):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile')
+    profile_picture = models.ImageField(default='default.png', upload_to='profile_pics')
+    preffered_genres = models.ManyToManyField(FoodGenre)
+
+    def __str__(self):
+        return f'{self.user.username}'
 
 class Eatery(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
     eatery_name = models.CharField(max_length=100)
     food_genre = models.CharField(max_length=200, default='', blank=True)
     details = models.TextField(blank=True)
@@ -15,7 +27,8 @@ class Eatery(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.eatery_name
+        return f'{self.eatery_name}'
+
     # Resize the logo
     def save(self, *args, **kwargs):
         super(Eatery, self).save(*args, **kwargs)
