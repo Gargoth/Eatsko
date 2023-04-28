@@ -14,10 +14,6 @@ body {
     background: var(--bg-color);
 }
 
-#id_preffered_genres {
-    height: 5em;
-}
-
 .site-header {
     padding: 2em 3em;
     margin-bottom: -1em;
@@ -174,6 +170,10 @@ select.food-genres {
     width: 10em;
     margin-right: 0.2em;
     border: 1px solid lightgray;
+}
+
+select#id_preffered_genres {
+    height: 5em;
 }
 
 .price-range-input {

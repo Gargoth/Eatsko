@@ -13,6 +13,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE, related_name='user_profile')
     account_type = models.CharField(max_length=100, default='User')
     profile_picture = models.ImageField(default='default.svg', upload_to='profile_pics')
+    # field typo
     preffered_genres = models.ManyToManyField(FoodGenre)
 
     @classmethod

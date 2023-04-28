@@ -81,7 +81,8 @@
                     </div>
                 </div>
                     <div class="signout-container">
-                        <a class="signout-btn" href="{% url 'sessionmanager-logout' %}">
+                        <a class="signout-btn" href="{% url 'sessionmanager-logout' %}"
+                                           {% if page == 'profile' %} onclick="return confirm('Exit without saving?');" {% endif %}>
                             <div class="signout-txt-container">
                                 <span class="signout-txt">SIGN OUT</span>
                             </div>
