@@ -24,7 +24,7 @@ def signup(request):
             account_type = form.cleaned_data.get('account_type')
 
             # Create Profile for new User
-            Profile.create(User.objects.filter(username=username, account_type=account_type).first()).save()
+            Profile.create(User.objects.filter(username=username).first(), account_type=account_type).save()
 
             messages.success(request, f'Account created for {username}!')
             return redirect('sessionmanager-opensession')

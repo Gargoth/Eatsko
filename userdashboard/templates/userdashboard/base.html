@@ -75,7 +75,11 @@
                         <div class="profile-label">
                             <span class="profile-label-txt profile-txt">Account Type:</span>
                             <div class="profile-content">
-                                <span class="profile-content-txt profile-txt">{{ user.user_profile.account_type }}</span>
+                                <span class="profile-content-txt profile-txt">
+                                    {% if user.user_profile.account_type == 'U' %} User
+                                    {% else %} {% if user.user_profile.account_type == 'B' %} Business Owner {% endif %}
+                                    {% endif %}
+                                </span>
                             </div>
                         </div>
                     </div>
