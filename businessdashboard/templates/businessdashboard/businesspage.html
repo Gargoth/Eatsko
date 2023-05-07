@@ -1,0 +1,47 @@
+{% extends "businessdashboard/base.html" %}
+{% block content %}
+{% load static %}
+
+<!-- Header and Search Bar -->
+<div class="d-flex">
+    <div class="mr-auto"> 
+       <img class="page-icon" src="{% static 'media/shop.svg' %}" alt="businesspage-icon"> 
+       <span class="page-title"> BUSINESS PAGE </span> 
+    </div>
+</div> 
+
+<hr style="margin: 0">
+<br>
+
+<!-- Eatery Info -->
+<div class="d-flex flex-column">
+    <div class="d-flex eatery-info-container p-1">
+        <img class="eatery-logo" src="{% static 'media/image.png' %}" alt="businesspage-logo">
+        <div class="flex-column p-1">
+            <div class="eatery-name"> Eatery Name </div>
+            <div class="eatery-other-info"> PPP - PPP </div>
+            <div class="eatery-other-info"> Food Genre </div>
+            <div class="eatery-other-info"> Location </div>
+        </div>
+        <!-- Edit Menu Button -->
+        <div class="ml-auto p-2">
+            <a href="{% url 'businessdashboard-editbusinesspage' %}"> 
+                <img class="edit-icon" src="{% static 'media/edit.svg' %}" alt="edit-businesspage-icon">
+            </a>
+        </div>
+    </div>
+    <!-- Menu -->
+    <div class="d-flex justify-content-center menu-title p-1"> MENU </div>
+    <div class="d-flex justify-content-center all-menu-items p-1 flex-column">
+        <!-- Menu Item -->
+        <div class="d-flex menu-item flex-row p-1">
+            <div class="d-flex p-2">
+                <img class="menu-item-image" src="{% static 'media/image.png' %}" alt="menu-item-image">
+            </div>
+            <div class="menu-item-name p-2"> Menu Item 1 </div>
+            <div class="menu-item-price ml-auto p-2"> PPP </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

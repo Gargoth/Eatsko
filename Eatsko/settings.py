@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
     'crispy_forms',
     'userdashboard.apps.UserdashboardConfig',
+    'businessdashboard.apps.BusinessdashboardConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -133,5 +134,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'userdashboard-dashboard'
+LOGIN_REDIRECT_URL = 'businessdashboard-dashboard'
 LOGIN_URL = 'sessionmanager-opensession'

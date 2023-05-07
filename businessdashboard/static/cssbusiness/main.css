@@ -1,0 +1,196 @@
+:root {
+    --primary-color: #982f28;
+    --secondary-color: #fde4ac;
+    --tertiary-color: #f2dcca;
+    --icon-color: #d58b4f;
+    --bg-color: #F3F3F3;
+}
+
+* {
+    font-family: Montserrat;
+}
+
+body {
+    background: var(--bg-color);
+    height: 100%;
+}
+
+html {
+    height: 100%;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+.site-header {
+    padding: 2em 3em;
+    margin-bottom: -1em;
+    background: var(--secondary-color);
+    filter: drop-shadow(0px 5px 5px gray);
+}
+
+.header-txt {
+    color: var(--primary-color);
+    font-size: 1.75em;
+}
+
+.site-panel {
+    background-color: white;
+    border-radius: 1.5em;
+    margin: 0px 1.13%;
+    padding: 1em;
+    filter: drop-shadow(0px 5px 2px gray);
+}
+
+.sidebar-btn-container {
+    padding: 0.75em;
+    border-radius: 1.2em;
+    font-size:1.35em;
+}
+
+.sidebar-active-container {
+    background: var(--tertiary-color);
+}
+
+.sidebar-btn-icon {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right:1em;
+}
+
+.sidebar-btn-text {
+    color: black;
+    font-weight: 500;
+}
+
+.business-page-text {
+    font-size:20px;
+}
+
+.site-end-container {
+    padding: 2em;
+}
+
+.signout-container {
+    display: flex;
+    justify-content: center;
+}
+
+.signout-txt-container {
+    display: flex;
+    margin: 2em;
+    padding: 0.2em 1.5em;
+    background: var(--primary-color);
+    border-radius: 1em;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(0px 2px 3px lightgray);
+}
+
+.signout-txt {
+    color: white;
+    font-size: 0.8em;
+}
+
+hr {
+    border-top: 0.5px solid;
+}
+
+.page-icon {
+    width: 2.5em;
+    height: 2.5em;
+    margin: 0.35em 0 0.35em 0.35em;
+}
+
+.page-title {
+    color: black;
+    font-size: 1.25em;
+    font-weight: bold;
+    margin: 0.35em;
+    text-align: center;
+}
+
+.profile-img {
+    background: var(--tertiary-color);
+    width: 10em;
+    height: 10em;
+}
+
+
+.profile-label {
+    font-size: 1.25em;
+}
+
+.profile-label-txt {
+    font-weight: 200;
+}
+
+.profile-content {
+    text-align: center;
+}
+
+.profile-content-txt {
+    font-weight: 600;
+}
+
+
+.eatery-info-container{
+    position: relative;
+    left: 10px;
+}
+
+.eatery-logo {
+    width: 100px; 
+    height: 100px;
+    margin-right: 1em;
+    margin-left: 0.5em;
+}
+
+.container {
+    border-radius: 0.5em;
+    box-shadow: 0 4px 4px lightgray;
+    padding: 20px;
+}
+
+.edit-icon {
+    height: 1em;
+}
+
+.edit-info-button {
+    position: relative;
+    left: 10px;
+}
+
+.menu-item {
+    border-radius: 1em; 
+    box-shadow: 0 4px 4px lightgray; 
+    padding: 10px; 
+    margin: 3px;
+}
+
+.menu-title {
+    text-decoration: underline; 
+    font-weight: bold;
+}
+
+.menu-item-price {
+    position: absolute; 
+    left:320px;
+}
+
+.menu-item-image {
+    height:25px;
+}
+
+.eatery-name {
+    font-weight: bold;
+}
+
+.eatery-other-info {
+    color: gray;
+}
+
+.add-item-icon {
+    height: 30px;
+}

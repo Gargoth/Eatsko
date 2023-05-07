@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'cssbusiness/main.css' %}">
+
+        {% if title %}
+            <title>Eatsko - {{ title }}</title>
+        {% else %}
+            <title>Eatsko: Kahit Saan!</title>
+        {% endif %}
+    </head>
+    <body>
+        <header class="container-fluid site-header">
+            <span class="header-txt">EATSKO: KAHIT SAAN!</span>
+        </header>
+
+        <div class="row px-5">
+            <div class="col-3 m-0 p-0">
+                <!-- Sidebar Buttons -->
+                <nav class="nav flex-column site-panel site-sidebar">
+                    <a class="sidebar-btn" href="{% url 'businessdashboard-dashboard' %}" 
+                                           {% if page == 'profile' %} onclick="return confirm('Exit without saving?');" {% endif %}>
+                        <div class="sidebar-btn-container {% if page == 'dashboard' %} sidebar-active-container {% endif %}">
+                            <img class="sidebar-btn-icon" src="{% static 'media/home.svg' %}" alt="home-icon">
+                            <span class="sidebar-btn-text">DASHBOARD</span>
+                        </div>
+                    </a>
+                    <a class="sidebar-btn" href="{% url 'businessdashboard-profile' %}"
+                                           {% if page == 'profile' %} onclick="return confirm('Exit without saving?');" {% endif %}>
+                        <div class="sidebar-btn-container {% if page == 'profile' %} sidebar-active-container {% endif %}">
+                            <img class="sidebar-btn-icon" src="{% static 'media/profile.svg' %}" alt="profile-icon">
+                            <span class="sidebar-btn-text">PROFILE</span>
+                        </div>
+                    </a>
+                    <a class="sidebar-btn" href="{% url 'businessdashboard-businesspage' %}"
+                                           {% if page == 'profile' %} onclick="return confirm('Exit without saving?');" {% endif %}>
+                        <div class="sidebar-btn-container {% if page == 'businesspage' or page == 'editbusinesspage' %} sidebar-active-container {% endif %}">
+                            <img class="sidebar-btn-icon" src="{% static 'media/shop.svg' %}" alt="businesspage-icon">
+                            <span class="sidebar-btn-text business-page-text">BUSINESS PAGE</span>
+                        </div>
+                    </a>
+                    <a class="sidebar-btn" href="{% url 'businessdashboard-viewrating' %}"
+                                           {% if page == 'profile' %} onclick="return confirm('Exit without saving?');" {% endif %}>
+                        <div class="sidebar-btn-container {% if page == 'viewrating' %} sidebar-active-container {% endif %}">
+                            <img class="sidebar-btn-icon" src="{% static 'media/search-normal-1.svg' %}" alt="viewrating-icon">
+                            <span class="sidebar-btn-text">VIEW RATING</span>
+                        </div>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- Center panel for main page content -->
+            <div class="col-5 site-panel main">
+                {% block content %}{% endblock content %}
+            </div>
+
+            <!-- Panel for Profile Information -->
+            <div class="col-3 m-0 p-0">
+                <div class="site-panel site-end-container">
+                    <div class="site-profile">
+                        <img class="mx-auto d-block rounded-circle profile-img" src="{{ user.user_profile.profile_picture.url }}" alt="user profile picture">
+                        <div class="profile-label">
+                            <span class="profile-label-txt profile-txt">Name:</span>
+                            <div class="profile-content">
+                                <span class="profile-content-txt profile-txt">{{ user.username }}</span>
+                            </div>
+                        </div>
+                        <div class="profile-label">
+                            <span class="profile-label-txt profile-txt">Account Type:</span>
+                            <div class="profile-content">
+                                <span class="profile-content-txt profile-txt">
+                                    {% if user.user_profile.account_type == 'U' %} User
+                                    {% else %} {% if user.user_profile.account_type == 'B' %} Business Owner {% endif %}
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="signout-container">
+                        <a class="signout-btn" href="{% url 'sessionmanager-logout' %}"
+                                           {% if page == 'profile' %} onclick="return confirm('Exit without saving?');" {% endif %}>
+                            <div class="signout-txt-container">
+                                <span class="signout-txt">SIGN OUT</span>
+                            </div>
+                        </a>
+                    </div>
+            </div>
+        </div>
+    </body>
+</html>

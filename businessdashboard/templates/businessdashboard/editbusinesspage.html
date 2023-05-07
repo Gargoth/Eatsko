@@ -1,0 +1,63 @@
+{% extends "businessdashboard/base.html" %}
+{% block content %}
+{% load static %}
+
+<!-- Header and Search Bar -->
+<div class="d-flex">
+    <div class="mr-auto"> 
+       <img class="page-icon" src="{% static 'media/shop.svg' %}" alt="businesspage-icon"> 
+       <span class="page-title"> BUSINESS PAGE </span> 
+    </div>
+</div> 
+
+<hr style="margin: 0">
+<br>
+
+<!-- Eatery Info -->
+<div class="d-flex flex-column">
+    <div class="d-flex eatery-info-container p-1">
+        <img class="eatery-logo" src="{% static 'media/image.png' %}" alt="businesspage-logo">
+        <div class="flex-column p-1">
+            <div class="eatery-name"> Eatery Name </div>
+            <div class="eatery-other-info"> PPP - PPP </div>
+            <div class="eatery-other-info"> Food Genre </div>
+            <div class="eatery-other-info"> Location </div>
+        </div>
+        <!-- Edit Eater Info Button -->
+        <div class="edit-info-button">
+            <a href="#"> 
+                <img class="edit-icon" src="{% static 'media/edit.svg' %}" alt="edit-businesspageinfo-icon">
+            </a>
+        </div>
+        <!-- View Page -->
+        <div class="ml-auto p-2">
+            <a class="btn btn-outline-secondary btn-sm" href="{% url 'businessdashboard-businesspage' %}" role="button">
+                View Page
+            </a>
+        </div>
+    </div>
+    <!-- Menu -->
+    <div class="d-flex justify-content-center menu-title p-1"> MENU </div>
+    <div class="d-flex justify-content-center all-menu-items p-1 flex-column">
+        <!-- Menu Item -->
+        <div class="d-flex menu-item flex-row p-1">
+            <div class="d-flex p-2">
+                <img class="menu-item-image" src="{% static 'media/image.png' %}" alt="menu-item-image">
+            </div>
+            <div class="menu-item-name p-2"> Menu Item 1 </div>
+            <div class="menu-item-price p-2"> PPP </div>
+            <!-- Edit Item Menu Buttons -->
+            <div class="d-flex flex-row edit-buttons ml-auto">
+                <a class="p-1" href="#"> <img class="edit-menu-icons" src="{% static 'media/edit.svg' %}" alt="edit-menu-icon"> </a>
+                <a class="p-1" href="#"> <img class="edit-menu-icons" src="{% static 'media/trash.svg' %}" alt="edit-menu-icon"> </a>
+                <a class="p-1" href="#"> <img class="edit-menu-icons" src="{% static 'media/ticket-discount.svg' %}" alt="edit-menu-icon"> </a>
+            </div>
+        </div>
+        <!-- Add Item to Menu -->
+        <div class="d-flex justify-content-center add-item">
+            <a class="p-1" href="#"> <img class="add-item-icon" src="{% static 'media/add.svg' %}" alt="add-item-icon"> </a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
