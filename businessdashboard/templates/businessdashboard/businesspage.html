@@ -33,14 +33,16 @@
     <!-- Menu -->
     <div class="d-flex justify-content-center menu-title p-1"> MENU </div>
     <div class="d-flex justify-content-center all-menu-items p-1 flex-column">
-        <!-- Menu Item -->
-        <div class="d-flex menu-item flex-row p-1">
-            <div class="d-flex p-2">
-                <img class="menu-item-image" src="{% static 'media/image.png' %}" alt="menu-item-image">
+        <!-- Menu Items -->
+        {% for item in menu %}
+            <div class="d-flex menu-item flex-row p-1">
+                <div class="d-flex p-2">
+                    <img class="menu-item-image" src="{% static 'media/image.png' %}" alt="menu-item-image">
+                </div>
+                <a class="menu-item-name p-2" href="#">{{ item.title }}</a>
+                <div class="menu-item-price ml-auto p-2"> {{ item.price }} </div>
             </div>
-            <div class="menu-item-name p-2"> Menu Item 1 </div>
-            <div class="menu-item-price ml-auto p-2"> PPP </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
 
