@@ -9,7 +9,9 @@ from django.views.generic import (
 )
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import Menu
+from businessdashboard.forms import UserUpdateForm, ProfileUpdateForm
 
 context = {}
 
@@ -75,7 +77,23 @@ class MenuDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 @login_required
 def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.user_profile)
+
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('businessdashboard-profile')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.user_profile)
+
     context['page'] = 'profile'
+    context['u_form'] = u_form
+    context['p_form'] = p_form
+
     return render(request, 'businessdashboard/profile.html', context)
 
 @login_required

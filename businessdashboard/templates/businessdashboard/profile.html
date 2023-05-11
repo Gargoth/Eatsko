@@ -1,4 +1,18 @@
 {% extends "businessdashboard/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
-profile
+
+<form method="POST" enctype="multipart/form-data" id="updateProfileForm">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Profile Info</legend>
+        {{ u_form|crispy }}
+        {{ p_form|crispy }}
+    </fieldset>
+    <div class="form-group">
+        <button class="btn btn-outline-info" type="submit" id="submitButton"
+            onclick="return confirm('Are you want to update your profile?');">Update</button>
+    </div>
+</form>
+
 {% endblock content %}
