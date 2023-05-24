@@ -1,7 +1,9 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
 from PIL import Image
+
 
 class FoodGenre(models.Model):
     name = models.CharField(max_length=100)
@@ -9,11 +11,11 @@ class FoodGenre(models.Model):
     def __str__(self):
         return f'{self.name}'
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE, related_name='user_profile')
     account_type = models.CharField(max_length=100, default='User')
     profile_picture = models.ImageField(default='profile_pics/default.png', upload_to='profile_pics')
-    # field typo
     preffered_genres = models.ManyToManyField(FoodGenre)
 
     @classmethod
@@ -33,9 +35,9 @@ class Profile(models.Model):
             img.thumbnail(output_size)
             img.save(self.profile_picture.path)
 
+
 class Eatery(models.Model):
     eatery_name = models.CharField(max_length=100)
-    food_genre = models.CharField(null=True, max_length=100) # Temporary Fix
     food_genres = models.ManyToManyField(FoodGenre)
     details = models.TextField(blank=True)
     location = models.CharField(max_length=200, default='')
@@ -55,3 +57,17 @@ class Eatery(models.Model):
             img.thumbnail(output_size)
             img.save(self.logo.path)
 
+
+class Menu(models.Model):
+    title = models.CharField(max_length=100)
+    eatery = models.ForeignKey(Eatery, on_delete=models.CASCADE, null=True)
+    content = models.TextField()
+    price = models.IntegerField(null=True, blank=True)
+    date_posted = models.DateTimeField(default=timezone.now)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('menu-detail', kwargs={'pk': self.pk})

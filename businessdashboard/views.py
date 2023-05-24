@@ -8,20 +8,23 @@ from django.views.generic import (
     DeleteView
 )
 from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Menu
+from userdashboard.models import Menu
 from businessdashboard.forms import UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import user_passes_test
 
 # Helper Functions
+
+
 def is_owner(user):
     return user.groups.filter(name="businessowner").exists()
+
 
 owner_required = user_passes_test(is_owner)
 
 # View Functions
 context = {}
+
 
 @owner_required
 def dashboard(request):
@@ -30,11 +33,13 @@ def dashboard(request):
     }
     return render(request, 'businessdashboard/dashboard.html', context)
 
+
 class MenuListView(ListView):
     model = Menu
     template_name = 'businessdashboard/businesspage.html'
     context_object_name = 'menu'
     ordering = ['-date_posted']
+
 
 class EditMenuListView(ListView):
     model = Menu
@@ -42,9 +47,11 @@ class EditMenuListView(ListView):
     context_object_name = 'menu'
     ordering = ['-date_posted']
 
+
 class MenuDetailView(DetailView):
     model = Menu
     context_object_name = 'menu'
+
 
 class MenuCreateView(LoginRequiredMixin, CreateView):
     model = Menu
@@ -79,7 +86,7 @@ class MenuDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == menu.author:
             return True
         return False
-    
+
 
 @owner_required
 def profile(request):
@@ -102,6 +109,7 @@ def profile(request):
 
     return render(request, 'businessdashboard/profile.html', context)
 
+
 @owner_required
 def businesspage(request):
     context = {
@@ -116,6 +124,7 @@ def editbusinesspage(request):
         'menu-items': Menu.objects.all()
     }
     return render(request, 'businessdashboard/editbusinesspage.html', context)
+
 
 @owner_required
 def viewrating(request):
