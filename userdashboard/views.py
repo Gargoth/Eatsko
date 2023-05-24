@@ -46,6 +46,11 @@ def campusmap(request):
 def findeatery(request):
     context['page'] = 'findeatery'
     return render(request, 'userdashboard/findeatery.html', context)
+
+@login_required
+def eaterypage(request):
+    context['page'] = 'eaterypage'
+    return render(request, 'userdashboard/eaterypage.html', context)
     
 class EateryListView(ListView):
     model = Eatery

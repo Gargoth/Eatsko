@@ -66,39 +66,47 @@
 </div>
 <hr style="margin: 0">
 
-<!-- Search Results -->
-<div class="search-results-container d-flex flex-wrap justify-content-around">
-   {% for eatery in eateries %} 
-   <a class="article-title" href="{% url 'userdashboard-eaterypage' %}">
-      <div class="d-flex eatery-result-container">
-         <article class="media content-section">
-            <img class="rounded-circle eatery-logo" src="{{ eatery.logo.url }}">
-            <div class="media-body d-flex flex-column">
-               <span class="eatery-name">{{ eatery.eatery_name }}</span>
-               <p class="eatery-description"> {{ eatery.food_genre }} <br> {{ eatery.location }} <br> Rating: </p>
+<!-- Eatery Page -->
+<div class="d-flex flex-column">
+    <div class="return-button">
+        <a href="{% url 'userdashboard-findeatery' %}">
+            <img class="return-button" src="{% static 'media/arrow-left.svg' %}">
+        </a>
+    </div>
+    <div class="d-flex eatery-info-container p-1 align-items-end">
+        <img class="eatery-page-logo align-self-center" src="{% static 'media/image.png' %}" alt="businesspage-logo">
+        <div class="flex-column p-1">
+            <div class="eatery-page-name"> Eatery Name </div>
+            <div class="eatery-other-info"> PPP - PPP </div>
+            <div class="eatery-other-info"> Food Genre </div>
+            <div class="eatery-other-info"> Location </div>
+        </div>
+        <!-- Ratings Menu -->
+        <div class="ml-auto p-2">
+            <div class="flex-column p-1 menu-rating">
+               <div class="current-rating"> Current Rating </div>
+               <div class="view-ratings"> 
+                 <a class="click-ratings" href="#">View Ratings</a>
+               </div>
+               <div class="submit-review"> 
+                  <a class="click-ratings" href="#"> Submit a Review </a>
+               </div>
             </div>
-         </article>
-      </div>
-   </a>
-   {% empty %} 
-   <p> No eateries found </p>
-   {% endfor %} 
-</div>
-<div class="pagination d-flex justify-content-center ">
-   <nav aria-label="...">
-      {% if is_paginated %} 
-      <ul class="pagination justify-content-center">
-         {% if page_obj.has_previous %} 
-         <li class="page-item"> <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a> </li>
-         {% endif %} {% for i in page_obj.paginator.page_range %} {% if page_obj.number == i %} 
-         <li class="page-item active"> <a class="page-link" href="#">{{ i }} <span class="sr-only">(current)</span></a> </li>
-         {% else %} 
-         <li class="page-item"> <a class="page-link" href="?page={{ i }}">{{ i }}</a> </li>
-         {% endif %} {% endfor %} {% if page_obj.has_next %} 
-         <li class="page-item"> <a class="page-link" href="?page={{ eateries.next_page_number }}">Next</a> </li>
-         {% endif %} 
-      </ul>
-      {% endif %} 
-   </nav>
+        </div>
+    </div>
+    <!-- Menu -->
+    <div class="d-flex justify-content-center menu-title p-1"> MENU </div>
+    <div class="d-flex justify-content-center all-menu-items p-1 flex-column">
+        <!-- Menu Items -->
+        {% for item in menu %}
+            <div class="d-flex menu-item flex-row p-1">
+                <div class="d-flex p-2">
+                    <img class="menu-item-image" src="{% static 'media/image.png' %}" alt="menu-item-image">
+                </div>
+                <a class="menu-item-name p-2" href="#">{{ item.title }}</a>
+                <div class="menu-item-price ml-auto p-2"> {{ item.price }} </div>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock content %}
