@@ -6,16 +6,23 @@ from .models import Eatery
 from userdashboard.forms import UserUpdateForm, ProfileUpdateForm
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.contrib.auth.decorators import user_passes_test
 
+# Helper Functions
+def is_visitor(user):
+    return user.groups.filter(name="visitor").exists()
 
+visitor_required = user_passes_test(is_visitor)
+
+# View Functions
 context = {}
 
-@login_required
+@visitor_required
 def dashboard(request):
     context['page'] = 'dashboard'
     return render(request, 'userdashboard/dashboard.html', context)
 
-@login_required
+@visitor_required
 def profile(request):
 
     if request.method == 'POST':
@@ -37,12 +44,12 @@ def profile(request):
 
     return render(request, 'userdashboard/profile.html', context)
 
-@login_required
+@visitor_required
 def campusmap(request):
     context['page'] = 'campusmap'
     return render(request, 'userdashboard/campusmap.html', context)
 
-@login_required
+@visitor_required
 def findeatery(request):
     context['page'] = 'findeatery'
     return render(request, 'userdashboard/findeatery.html', context)

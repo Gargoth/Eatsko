@@ -12,12 +12,18 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Menu
 from businessdashboard.forms import UserUpdateForm, ProfileUpdateForm
+from django.contrib.auth.decorators import user_passes_test
 
+# Helper Functions
+def is_owner(user):
+    return user.groups.filter(name="businessowner").exists()
+
+owner_required = user_passes_test(is_owner)
+
+# View Functions
 context = {}
 
-
-
-@login_required
+@owner_required
 def dashboard(request):
     context = {
         'menu': Menu.objects.all()
@@ -75,7 +81,7 @@ class MenuDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
     
 
-@login_required
+@owner_required
 def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
@@ -96,7 +102,7 @@ def profile(request):
 
     return render(request, 'businessdashboard/profile.html', context)
 
-@login_required
+@owner_required
 def businesspage(request):
     context = {
         'menu-items': Menu.objects.all()
@@ -104,14 +110,14 @@ def businesspage(request):
     return render(request, 'businessdashboard/businesspage.html', context)
 
 
-@login_required
+@owner_required
 def editbusinesspage(request):
     context = {
         'menu-items': Menu.objects.all()
     }
     return render(request, 'businessdashboard/editbusinesspage.html', context)
 
-@login_required
+@owner_required
 def viewrating(request):
     context['page'] = 'viewrating'
     return render(request, 'businessdashboard/viewrating.html', context)

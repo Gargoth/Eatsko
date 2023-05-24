@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
-    CHOICES = [('U','User'),('B','Business Owner')]
+    CHOICES = [('User','User'),('Business Owner','Business Owner')]
     account_type=forms.CharField(label='Account Type', widget=forms.RadioSelect(choices=CHOICES))
 
     class Meta:
