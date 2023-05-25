@@ -1,4 +1,76 @@
 {% extends "businessdashboard/base.html" %}
 {% block content %}
-view rating
+{% load static %}
+
+
+<div class="mr-auto"> 
+    <img class="page-icon" src="{% static 'media/search-normal-1.svg' %}" alt="viewrating-icon">
+    <span class="page-title"> RATINGS & REVIEWS </span> 
+ </div>
+
+
+
+
+{% if reviews %}
+
+<ul>
+    <p><strong>Average Rating:</strong> {{ average_rating }}</p>
+    {% for review in reviews %}
+      <li class="review-item">
+        <div class="review-profile-picture">
+          <img src="{{ review.profile.user.user_profile.profile_picture.url }}" alt="Profile Picture">
+        </div>
+        <div class="review-content">
+          <strong> {{ review.profile.user.username }}</strong> &nbsp; <small class="text-muted">{{review.date_posted }}</small> <br>
+          
+          <div class="star-rating">
+            {% for i in range_five%}
+              {% if i <= review.rating %}
+                <span class="star">&#9733;</span>
+              {% else %}
+                <span class="star">&#9734;</span>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {{ review.comment }}<br>
+          
+          
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No reviews available for this eatery.</p>
+{% endif %}
+
+<style>
+.review-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .review-profile-picture img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .review-content {
+    flex-grow: 1;
+  }
+
+  .star-rating {
+    font-size: 16px; 
+    color: #000000;
+  }
+  
+  .star {
+    display: inline-block;
+    width: 12px;
+  }
+</style>
+
 {% endblock content %}

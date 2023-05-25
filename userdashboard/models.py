@@ -72,3 +72,23 @@ class Menu(models.Model):
 
     def get_absolute_url(self):
         return reverse('menu-detail', kwargs={'pk': self.pk})
+
+
+class Review(models.Model):
+    RATING_CHOICES = (
+        (1, 'Bad'),
+        (2, 'Fair'),
+        (3, 'Average'),
+        (4, 'Good'),
+        (5, 'Excellent')
+    )
+
+    rating = models.IntegerField(choices=RATING_CHOICES)
+    comment = models.TextField()
+    eatery = models.ForeignKey(Eatery, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    date_posted = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.profile.user.username
+
