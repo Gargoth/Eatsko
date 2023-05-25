@@ -62,6 +62,7 @@ class MenuCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        form.instance.eatery = self.request.user.user_profile.eatery
         return super().form_valid(form)
 
 
@@ -117,24 +118,17 @@ def profile(request):
 
 @owner_required
 def businesspage(request):
-    context = {
-        'menu-items': request.user.user_profile.eatery.menuitems.all(),
-    }
-    return render(request, 'businessdashboard/businesspage.html', context)
+    return render(request, 'businessdashboard/businesspage.html')
 
 
 @owner_required
 def editbusinesspage(request):
-    context = {
-        'menu-items': request.user.user_profile.eatery.menuitems.all(),
-    }
-    return render(request, 'businessdashboard/editbusinesspage.html', context)
+    return render(request, 'businessdashboard/editbusinesspage.html')
 
 
-
-@owner_required 
+@owner_required
 def viewrating(request):
-    eatery = Eatery.objects.get(id= request.user.user_profile.eatery.id)  # Replace <eatery_id> with the ID of the current eatery
+    eatery = Eatery.objects.get(id=request.user.user_profile.eatery.id)  # Replace <eatery_id> with the ID of the current eatery
     reviews = Review.objects.filter(eatery=eatery)
     average_rating = reviews.aggregate(Avg('rating'))['rating__avg']
 
@@ -142,9 +136,8 @@ def viewrating(request):
         'eatery': eatery,
         'reviews': reviews,
         'average_rating': average_rating,
-        'range_five': [1,2,3,4,5],
+        'range_five': [1, 2, 3, 4, 5],
         'page': 'viewrating'
     }
 
     return render(request, 'businessdashboard/viewrating.html', context)
-
