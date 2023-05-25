@@ -9,9 +9,10 @@ from django.views.generic import (
 )
 from django.http import HttpResponse
 from django.contrib import messages
-from userdashboard.models import Menu
+from userdashboard.models import Menu, Eatery, Review
 from businessdashboard.forms import UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import user_passes_test
+from django.db.models import Avg
 
 # Helper Functions
 
@@ -127,7 +128,20 @@ def editbusinesspage(request):
     return render(request, 'businessdashboard/editbusinesspage.html', context)
 
 
-@owner_required
+
+@owner_required 
 def viewrating(request):
-    context['page'] = 'viewrating'
+    eatery = Eatery.objects.get(id= request.user.user_profile.eatery.id)  # Replace <eatery_id> with the ID of the current eatery
+    reviews = Review.objects.filter(eatery=eatery)
+    average_rating = reviews.aggregate(Avg('rating'))['rating__avg']
+
+    context = {
+        'eatery': eatery,
+        'reviews': reviews,
+        'average_rating': average_rating,
+        'range_five': [1,2,3,4,5],
+        'page': 'viewrating'
+    }
+
     return render(request, 'businessdashboard/viewrating.html', context)
+
