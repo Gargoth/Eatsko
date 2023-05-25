@@ -6,7 +6,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .models import Eatery, Review
+from .models import Eatery, Review, Profile
 from userdashboard.forms import UserUpdateForm, ProfileUpdateForm
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
@@ -134,28 +134,35 @@ class DashboardEateryListView(ListView):
         context['food_genre'] = self.request.GET.get('food_genre')
         return context
 
+class ReviewListView(ListView):
+    model = Review
+    template_name = 'userdashboard/review-list.html'
+    ordering = ['-date_posted']
+
 class ReviewDetailView(DetailView):
     model = Review
 
 class ReviewCreateView(LoginRequiredMixin, CreateView):
     model = Review
-    fields = ['rating', 'comment', 'eatery']
+    template_name = 'userdashboard/review_form.html'
+    fields = ['rating', 'comment', 'eatery', 'profile']
 
+    success_url = '/user/'
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
     
 class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Review
-    fields = ['rating', 'comment', 'eatery']
+    fields = ['rating', 'comment', 'eatery', 'profile']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
     def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author:
+        review = self.get_object()
+        if self.request.user == review.author:
             return True
         return False
 

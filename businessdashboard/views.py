@@ -29,9 +29,17 @@ context = {}
 
 @owner_required
 def dashboard(request):
+    eatery = Eatery.objects.get(id=request.user.user_profile.eatery.id)  # Replace <eatery_id> with the ID of the current eatery
+    reviews = Review.objects.filter(eatery=eatery)
+    average_rating = reviews.aggregate(Avg('rating'))['rating__avg']
     context = {
-        'menu': request.user.user_profile.eatery.menuitems.all()
+        'menu': request.user.user_profile.eatery.menuitems.all(),
+        'eatery': eatery,
+        'reviews': reviews,
+        'average_rating': average_rating
     }
+    
+
     return render(request, 'businessdashboard/dashboard.html', context)
 
 

@@ -5,12 +5,12 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Menu</legend>
+                <legend class="border-bottom mb-4">Review</legend>
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Post</button>
-                <a class="btn btn-outline-secondary" href="{% url 'businessdashboard-businesspage' %}">Cancel</a>
+                <a class="btn btn-outline-secondary" href="{% url 'userdashboard-findeatery' %}">Cancel</a>
             </div>
         </form>
     </div>

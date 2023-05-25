@@ -88,7 +88,7 @@
                  <a class="click-ratings" href="#">View Ratings</a>
                </div>
                <div class="submit-review"> 
-                  <a class="click-ratings" href="#"> Submit a Review </a>
+                  <a class="click-ratings" href="{% url 'review-create' %}"> Submit a Review </a>
                </div>
             </div>
         </div>
@@ -97,7 +97,7 @@
     <div class="d-flex justify-content-center menu-title p-1"> MENU </div>
     <div class="d-flex justify-content-center all-menu-items p-1 flex-column">
         <!-- Menu Items -->
-        {% for item in menu %}
+        {% for item in request.eatery.menuitems.all %}
             <div class="d-flex menu-item flex-row p-1">
                 <div class="d-flex p-2">
                     <img class="menu-item-image" src="{% static 'media/image.png' %}" alt="menu-item-image">

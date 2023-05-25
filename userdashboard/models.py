@@ -32,6 +32,7 @@ class Eatery(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.logo.path)
+    
 
 
 class Profile(models.Model):
@@ -85,10 +86,14 @@ class Review(models.Model):
 
     rating = models.IntegerField(choices=RATING_CHOICES)
     comment = models.TextField()
-    eatery = models.ForeignKey(Eatery, on_delete=models.CASCADE)
+    eatery = models.ForeignKey(Eatery, on_delete=models.CASCADE, null=True, related_name='ratings')
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(default=timezone.now)
+    
 
     def __str__(self):
         return self.profile.user.username
+    
+    def get_absolute_url(self):
+        return reverse('review-detail', kwargs={'pk': self.pk})
 

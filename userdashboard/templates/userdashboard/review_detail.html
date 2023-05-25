@@ -13,10 +13,10 @@
           </div>
         {% endif %}
       </div>
-      <h2 class="article-title">{{ object.title }}</h2>
-      <p class="article-content">{{ object.content }}</p>
-      <p class="article-price">{{ object.price }}</p>
-      <a class="btn btn-outline-secondary" href="{% url 'businessdashboard-businesspage' %}">Return to Business Page</a>
+      <h2 class="article-title">{{ object.rating }}</h2>
+      <p class="article-content">{{ object.comment }}</p>
+      <p class="article-price">{{ object.eatery }}</p>
+      <a class="btn btn-outline-secondary" href="{% url 'userdashboard-findeatery' %}">Return</a>
     </div>
   </article>
 {% endblock content %}
