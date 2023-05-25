@@ -29,7 +29,7 @@ context = {}
 @owner_required
 def dashboard(request):
     context = {
-        'menu': Menu.objects.all()
+        'menu': request.user.user_profile.eatery.menuitems.all()
     }
     return render(request, 'businessdashboard/dashboard.html', context)
 
@@ -55,6 +55,7 @@ class MenuDetailView(DetailView):
 
 class MenuCreateView(LoginRequiredMixin, CreateView):
     model = Menu
+    template_name = 'businessdashboard/menu_form.html'
     fields = ['title', 'content', 'price']
 
     def form_valid(self, form):
@@ -113,7 +114,7 @@ def profile(request):
 @owner_required
 def businesspage(request):
     context = {
-        'menu-items': Menu.objects.all()
+        'menu-items': request.user.user_profile.eatery.menuitems.all(),
     }
     return render(request, 'businessdashboard/businesspage.html', context)
 
@@ -121,7 +122,7 @@ def businesspage(request):
 @owner_required
 def editbusinesspage(request):
     context = {
-        'menu-items': Menu.objects.all()
+        'menu-items': request.user.user_profile.eatery.menuitems.all(),
     }
     return render(request, 'businessdashboard/editbusinesspage.html', context)
 

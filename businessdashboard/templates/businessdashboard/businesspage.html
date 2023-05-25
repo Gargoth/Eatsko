@@ -18,10 +18,10 @@
     <div class="d-flex eatery-info-container p-1">
         <img class="eatery-logo" src="{% static 'media/image.png' %}" alt="businesspage-logo">
         <div class="flex-column p-1">
-            <div class="eatery-name"> Eatery Name </div>
-            <div class="eatery-other-info"> PPP - PPP </div>
-            <div class="eatery-other-info"> Food Genre </div>
-            <div class="eatery-other-info"> Location </div>
+            <div class="eatery-name">{{ user.user_profile.eatery.eatery_name }}</div>
+            <!-- <div class="eatery-other-info"> PPP - PPP </div> -->
+            <div class="eatery-other-info">{% for genre in user.user_profile.eatery.food_genres.all %}{{genre}} {% endfor %}</div>
+            <div class="eatery-other-info"> {{ user.user_profile.eatery.location }} </div>
         </div>
         <!-- Edit Menu Button -->
         <div class="ml-auto p-2">
