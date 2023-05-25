@@ -1,9 +1,17 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
-from .models import Eatery
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
+from .models import Eatery, Review
 from userdashboard.forms import UserUpdateForm, ProfileUpdateForm
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
 
 # Helper Functions
 
@@ -124,3 +132,38 @@ class DashboardEateryListView(ListView):
         context['location'] = self.request.GET.get('location')
         context['food_genre'] = self.request.GET.get('food_genre')
         return context
+
+class ReviewDetailView(DetailView):
+    model = Review
+
+class ReviewCreateView(LoginRequiredMixin, CreateView):
+    model = Review
+    fields = ['rating', 'comment', 'eatery']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Review
+    fields = ['rating', 'comment', 'eatery']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Review
+    success_url = '/'
+
+    def test_func(self):
+        review = self.get_object()
+        if self.request.user == review.author:
+            return True
+        return False
