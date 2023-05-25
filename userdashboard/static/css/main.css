@@ -195,7 +195,6 @@ select#id_preffered_genres {
     color: black;
     font-size: 0.65em;
     font-weight: bold;
-    text-decoration: underline;
 }
 
 .eatery-result-container {
@@ -232,4 +231,52 @@ select#id_preffered_genres {
 .content-section {
     margin: 0.5em 0.5em 0.5em 0;
     padding: 0.5em 0.5em 0.5em 0;
+}
+
+a.click-ratings {
+    color: black;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.menu-rating {
+    font-size: 0.8em;
+    text-align: right;
+}
+
+.eatery-page-name {
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+.eatery-page-logo {
+    width: 100px; 
+    height: 100px;
+    margin-right: 1em;
+    margin-left: 0.5em;
+}
+
+.eatery-other-info {
+    color: gray;
+}
+
+.menu-title {
+    text-decoration: underline; 
+    font-weight: bold;
+}
+
+.menu-item-price {
+    position: absolute; 
+    left:320px;
+}
+
+.menu-item-image {
+    height:25px;
+}
+
+.menu-item {
+    border-radius: 1em; 
+    box-shadow: 0 4px 4px lightgray; 
+    padding: 10px; 
+    margin: 3px;
 }

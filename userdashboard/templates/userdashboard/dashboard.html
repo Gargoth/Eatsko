@@ -1,4 +1,61 @@
 {% extends "userdashboard/base.html" %}
 {% block content %}
-dashboard
+{% load static %}
+
+<!-- Header and Search Bar -->
+<div class="d-flex">
+
+    <div class="mr-auto"> 
+       <img class="page-icon" src="{% static 'media/big-search.svg' %}" alt="findeatery-icon"> 
+       <span class="page-title"> FIND EATERY </span> 
+    </div>
+ 
+    <div class="ml-auto search-bar">
+       <form method="get" class="d-flex"action="{% url 'userdashboard-findeatery' %}">
+       <div class="form-group ml-auto search-bar" > 
+          <input class="form-control form-rounded me-2 search-bar-input" type="search" placeholder="Search Eateries" 
+          aria-label="Search" name="q" value="{{ search_term|default:"" }}" id="search"> 
+       </div>
+       <button class="search-button btn btn-outline-secondary form-rounded " type="submit"> 
+         <img class="search-bar-icon" src="{% static 'media/search.svg' %}" alt="search-icon"> 
+       </button> 
+    </div>
+ 
+ </div>
+
+ <!-- Search Results -->
+<div class="search-results-container d-flex flex-wrap justify-content-around">
+    {% for eatery in eateries %} 
+    <a class="article-title" href="{% url 'userdashboard-eaterypage' %}">
+       <div class="d-flex eatery-result-container">
+          <article class="media content-section">
+             <img class="rounded-circle eatery-logo" src="{{ eatery.logo.url }}">
+             <div class="media-body d-flex flex-column">
+                <span class="eatery-name">{{ eatery.eatery_name }}</span>
+                <p class="eatery-description"> {{ eatery.food_genre }} <br> {{ eatery.location }} <br> Rating: </p>
+             </div>
+          </article>
+       </div>
+    </a>
+    {% empty %} 
+    <p> No eateries found </p>
+    {% endfor %} 
+ </div>
+ <div class="pagination d-flex justify-content-center ">
+    <nav aria-label="...">
+       {% if is_paginated %} 
+       <ul class="pagination justify-content-center">
+          {% if page_obj.has_previous %} 
+          <li class="page-item"> <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a> </li>
+          {% endif %} {% for i in page_obj.paginator.page_range %} {% if page_obj.number == i %} 
+          <li class="page-item active"> <a class="page-link" href="#">{{ i }} <span class="sr-only">(current)</span></a> </li>
+          {% else %} 
+          <li class="page-item"> <a class="page-link" href="?page={{ i }}">{{ i }}</a> </li>
+          {% endif %} {% endfor %} {% if page_obj.has_next %} 
+          <li class="page-item"> <a class="page-link" href="?page={{ eateries.next_page_number }}">Next</a> </li>
+          {% endif %} 
+       </ul>
+       {% endif %} 
+    </nav>
+ </div>
 {% endblock content %}

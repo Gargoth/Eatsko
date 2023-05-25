@@ -61,6 +61,12 @@ def findeatery(request):
     return render(request, 'userdashboard/findeatery.html', context)
 
 
+@visitor_required
+def eaterypage(request):
+    context['page'] = 'eaterypage'
+    return render(request, 'userdashboard/eaterypage.html', context)
+
+
 class EateryListView(ListView):
     model = Eatery
     template_name = 'userdashboard/findeatery.html'
@@ -81,6 +87,35 @@ class EateryListView(ListView):
         if food_genre:
             queryset = queryset.filter(food_genre__icontains=food_genre)
 
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_term'] = self.request.GET.get('q')
+        context['location'] = self.request.GET.get('location')
+        context['food_genre'] = self.request.GET.get('food_genre')
+        return context
+
+
+class DashboardEateryListView(ListView):
+    model = Eatery
+    template_name = 'userdashboard/dashboard.html'
+    context_object_name = 'eateries'
+    paginate_by = 6
+    ordering = ['eatery_name']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('q')
+        location = self.request.GET.get('location')
+        food_genre = self.request.GET.get('food_genre')
+
+        if query:
+            queryset = queryset.filter(eatery_name__icontains=query)
+        if location:
+            queryset = queryset.filter(location__icontains=location)
+        if food_genre:
+            queryset = queryset.filter(food_genre__icontains=food_genre)
         return queryset
 
     def get_context_data(self, **kwargs):
