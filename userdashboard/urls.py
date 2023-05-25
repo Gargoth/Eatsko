@@ -9,5 +9,5 @@ urlpatterns = [
     path('profile', views.profile, name='userdashboard-profile'),
     path('campusmap', views.campusmap, name='userdashboard-campusmap'),
     path('findeatery', EateryListView.as_view(), name='userdashboard-findeatery'),
-    path('eaterypage', views.eaterypage, name='userdashboard-eaterypage'),
+    path('eaterypage/<int:eatery_id>', views.eaterypage, name='userdashboard-eaterypage'),
 ]

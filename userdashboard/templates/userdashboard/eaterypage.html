@@ -74,12 +74,11 @@
         </a>
     </div>
     <div class="d-flex eatery-info-container p-1 align-items-end">
-        <img class="eatery-page-logo align-self-center" src="{% static 'media/image.png' %}" alt="businesspage-logo">
+        <img class="eatery-logo align-self-center" src="{{ eatery.logo.url }}" alt="businesspage-logo">
         <div class="flex-column p-1">
-            <div class="eatery-page-name"> Eatery Name </div>
-            <div class="eatery-other-info"> PPP - PPP </div>
-            <div class="eatery-other-info"> Food Genre </div>
-            <div class="eatery-other-info"> Location </div>
+            <div class="eatery-name">{{ eatery.eatery_name }}</div>
+            <div class="eatery-other-info">{% for genre in eatery.food_genres.all %}{{genre}} {% endfor %}</div>
+            <div class="eatery-other-info"> {{ eatery.location }} </div>
         </div>
         <!-- Ratings Menu -->
         <div class="ml-auto p-2">
