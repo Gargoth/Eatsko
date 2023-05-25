@@ -26,7 +26,7 @@
  <!-- Search Results -->
 <div class="search-results-container d-flex flex-wrap justify-content-around">
     {% for eatery in eateries %} 
-    <a class="article-title" href="{% url 'userdashboard-eaterypage' %}">
+    <a class="article-title" href="{% url 'userdashboard-eaterypage' eatery.id %}">
        <div class="d-flex eatery-result-container">
           <article class="media content-section">
              <img class="rounded-circle eatery-logo" src="{{ eatery.logo.url }}">

@@ -70,8 +70,9 @@ def findeatery(request):
 
 
 @visitor_required
-def eaterypage(request):
+def eaterypage(request, eatery_id):
     context['page'] = 'eaterypage'
+    context['eatery'] = Eatery.objects.get(id=eatery_id)
     return render(request, 'userdashboard/eaterypage.html', context)
 
 

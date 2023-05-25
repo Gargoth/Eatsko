@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, PostSignUpBOForm
 from django.contrib.auth.models import User
 from userdashboard.models import Profile
 from django.contrib.auth.models import Group, Permission
@@ -23,6 +23,8 @@ def loginredirect(request):
 
     if account_type == 'User':
         return redirect('userdashboard-dashboard')
+    elif account_type == 'Business Owner' and request.user.user_profile.eatery is None:
+        return redirect('sessionmanager-postsignupbusinessowner')
     elif account_type == 'Business Owner':
         return redirect('businessdashboard-dashboard')
     else:
@@ -52,3 +54,23 @@ def signup(request):
     else:
         form = UserRegisterForm()
     return render(request, 'sessionmanager/signup.html', {"form": form})
+
+
+@login_required
+def postsignup_businessowner(request):
+    context = {}
+
+    if request.method == 'POST':
+        form = PostSignUpBOForm(request.POST, instance=request.user.user_profile)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'The managed eatery has been saved!')
+            return redirect('businessdashboard-dashboard')
+
+    else:
+        form = PostSignUpBOForm(request.POST, instance=request.user.user_profile)
+
+    context['form'] = form
+
+    return render(request, 'sessionmanager/postsignupbusinessowner.html', context)
