@@ -50,6 +50,7 @@ class EditMenuListView(ListView):
 
 class MenuDetailView(DetailView):
     model = Menu
+    template_name = 'businessdashboard/menu_detail.html'
     context_object_name = 'menu'
 
 
@@ -65,6 +66,7 @@ class MenuCreateView(LoginRequiredMixin, CreateView):
 
 class MenuUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Menu
+    template_name = 'businessdashboard/menu_form.html'
     fields = ['title', 'content', 'price']
 
     def form_valid(self, form):
@@ -80,7 +82,8 @@ class MenuUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class MenuDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Menu
-    success_url = '/'
+    template_name = 'businessdashboard/menu_confirm_delete.html'
+    success_url = '/business/businesspage'
 
     def test_func(self):
         menu = self.get_object()
