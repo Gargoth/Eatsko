@@ -1,4 +1,31 @@
 {% extends "businessdashboard/base.html" %}
 {% block content %}
-dashboard
+{% load static %}
+
+<div class="row">
+    <div class="col">
+        <div class="section-title"> BUSINESS INFO </div>
+        <br>
+        <div class="d-flex align-items-center justify-content-center">
+            <img class="eatery-dash-logo" src="{% static 'media/image.png' %}" alt="businesspage-logo">
+            <div class="flex-column p-1">
+                <div class="eatery-dash-name"> Eatery Name </div>
+                <div class="eatery-dash-other-info"> PPP - PPP </div>
+                <div class="eatery-dash-other-info"> Food Genre </div>
+                <div class="eatery-dash-other-info"> Location </div>
+            </div>
+        </div>
+        <div class="update-page-link">
+            <a class="update-page-link" href="{% url 'businessdashboard-businesspage' %}"> UPDATE BUSINESS PAGE </a>
+        </div>
+    </div>
+    <div class="col">
+        <div class="section-title"> CURRENT RATING </div>
+        <br>
+    </div>
+</div>
+<br>
+<div class="recent-reviews">
+    <div class="section-title"> RECENT REVIEWS </div>
+</div>
 {% endblock content %}

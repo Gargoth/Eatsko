@@ -194,3 +194,37 @@ hr {
 .add-item-icon {
     height: 30px;
 }
+
+.section-title {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.current-rating {
+    text-align: right;
+}
+
+.eatery-dash-name {
+    font-weight: bold;
+    font-size: 0.7em;
+}
+
+.eatery-dash-other-info {
+    color: gray;
+    font-size: 0.7em;
+}
+
+.eatery-dash-logo {
+    width: 100px; 
+    height: 100px;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+}
+
+.update-page-link {
+    color: black;
+    font-size: 0.8em;
+    text-decoration: underline;
+    text-align: center;
+    font-weight: 600;
+}
