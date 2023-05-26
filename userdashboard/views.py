@@ -157,11 +157,12 @@ class ReviewDetailView(DetailView):
 class ReviewCreateView(LoginRequiredMixin, CreateView):
     model = Review
     template_name = 'userdashboard/review_form.html'
-    fields = ['rating', 'comment', 'eatery', 'profile']
+    fields = ['rating', 'comment', 'eatery']
 
     success_url = '/user/'
     def form_valid(self, form):
         form.instance.author = self.request.user
+        form.instance.profile = self.request.user.user_profile
         return super().form_valid(form)
     
 class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
