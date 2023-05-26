@@ -11,6 +11,7 @@ from userdashboard.forms import UserUpdateForm, ProfileUpdateForm
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import Avg
 
 
 # Helper Functions
@@ -74,6 +75,17 @@ def eaterypage(request, eatery_id):
     context['page'] = 'eaterypage'
     context['eatery'] = Eatery.objects.get(id=eatery_id)
     return render(request, 'userdashboard/eaterypage.html', context)
+
+
+@visitor_required
+def eaterypagereviews(request, eatery_id):
+    context['page'] = 'eaterypage'
+    context['eatery'] = Eatery.objects.get(id=eatery_id)
+    context['reviews'] = Review.objects.filter(eatery=context['eatery'])
+    context['average_rating'] = context['reviews'].aggregate(Avg('rating'))['rating__avg']
+    context['range_five'] = [1, 2, 3, 4, 5]
+
+    return render(request, 'userdashboard/eaterypagereviews.html', context)
 
 
 class EateryListView(ListView):
