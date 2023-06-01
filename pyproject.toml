@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "eatsko"
+version = "5.0.0"
+description = "Eatsko is a web application that provides its users with an easy-to-use interface for finding a place to eat within the University of the Philippines Diliman campus. It allows the user to filter eateries by type of food and by price. The web app can also suggest places depending on the user’s set preferences and their specified area."
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+asgiref = "3.6.0"
+bootstrap4 = "0.1.0"
+crispy-bootstrap4 = "2022.1"
+django = "4.1.7"
+django-crispy-forms = "2.0"
+pillow = "9.4.0"
+python-decouple = "3.7"
+sqlparse = "0.4.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
