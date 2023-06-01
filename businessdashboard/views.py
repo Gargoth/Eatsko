@@ -38,7 +38,7 @@ def dashboard(request):
         'reviews': reviews,
         'average_rating': average_rating,
         'range_five': [1, 2, 3, 4, 5],
-        'page': 'viewrating',
+        'page': 'dashboard',
         'menu': request.user.user_profile.eatery.menuitems.all()
     }
 
@@ -128,11 +128,13 @@ def profile(request):
 
 @owner_required
 def businesspage(request):
+    context['page'] = 'businesspage'
     return render(request, 'businessdashboard/businesspage.html')
 
 
 @owner_required
 def editbusinesspage(request):
+    context['page'] = 'businesspage'
     return render(request, 'businessdashboard/editbusinesspage.html')
 
 
